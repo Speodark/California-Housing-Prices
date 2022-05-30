@@ -1,0 +1,67 @@
+.number-range {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+
+  > * {
+    flex: 1;
+  }
+  // remove the increase and decrease arrows
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+  }
+
+  // the header and text
+  header h2{
+    font-size: 2.4rem;
+    font-weight: 600;
+  }
+  header p{
+    font-size: 1.6rem;
+  }
+
+  // the input and input field
+  &__input {
+    display: flex;
+
+    &--field {
+      display: flex;
+      align-items: center;
+      input {
+        width: 100%;
+        outline: none;
+        font-size: 1.5rem;
+        border-radius: 5px;
+        text-align: center;
+        border: 1px solid #999;
+        -moz-appearance: textfield;
+
+        margin-left: 1rem;
+      }
+
+      span {
+        font-size: 1.5rem;
+      }
+
+    }
+  }
+
+  &__separator {
+    width: 13rem;
+    display: flex;
+    font-size: 1.9rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // the slider component
+  &__slider{
+    padding: 0 !important;
+    // cennter the slider
+    display: flex;
+    align-items: center;
+  }
+}

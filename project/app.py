@@ -1,6 +1,6 @@
 from dash import html, dcc
 from main_dash import app
-
+from pages.dashboard import dashboard
 
 # Generate the app layout
 def generateAppLayout():
@@ -8,6 +8,7 @@ def generateAppLayout():
         className="container",
         children=[
             dcc.Location(id='url', refresh=False),
+            dashboard()
         ]
     )
 

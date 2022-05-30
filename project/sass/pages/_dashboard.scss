@@ -1,0 +1,30 @@
+.dashboard {
+    // take all available space
+    height: 100%;
+    width: 100%;
+
+    // padding all around
+    padding: 1rem;
+
+    // make a grid of 16 by 16
+    display: grid;
+    grid-template-rows: repeat(16, minmax(0, 1fr));
+    grid-template-columns: repeat(16, 1fr);
+    grid-gap: 2rem;
+
+    &__scatter-map {
+        grid-column: 1 / 8;
+        grid-row: 1 / 5;
+    }
+
+    &__popular-houses {
+        grid-column: 1 / 8;
+        grid-row: 5 / 11;
+    }
+
+    &__number-range{
+        grid-column: 14 / -1;
+        grid-row: 1 / 4;
+        // i should make this a column flex box and use align-content and space around.             
+    }
+}

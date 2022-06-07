@@ -97,6 +97,7 @@ class Number_range_AIO(Card):  # card will be the "parent" component
                                     min=minimum, 
                                     max=maximum, 
                                     step=None,
+                                    debounce=True,
                                     id=self.ids.input_max(aio_id)
                                 )
                             ]

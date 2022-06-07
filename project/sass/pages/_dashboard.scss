@@ -27,4 +27,11 @@
         grid-row: 1 / 4;
         // i should make this a column flex box and use align-content and space around.             
     }
+
+    &__living-room{
+        grid-row: 4/-1;
+        grid-column: 14/-1;
+        padding: 1rem;
+        font-size: 1.4rem;
+    }
 }

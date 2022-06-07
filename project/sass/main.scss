@@ -3,12 +3,12 @@
 @import "abstracts/variables";
 @import "abstracts/animations";
 
-
 @import "base/base";
 @import "base/typography";
 @import "base/utilities";
 
 @import "components/card";
 @import "components/number_range";
+@import "components/dropdown";
 
 @import "pages/dashboard";

@@ -57,7 +57,7 @@ body {
   width: 100%;
   border-radius: 3px; }
   .card__header {
-    font-size: 1.6rem;
+    font-size: inherit;
     padding: 1rem 0 0;
     display: flex;
     align-items: center; }
@@ -105,6 +105,38 @@ body {
     display: flex;
     align-items: center; }
 
+.dropdown li {
+  text-decoration: none;
+  color: #2d2f31; }
+
+.dropdown span {
+  padding: 30px;
+  background: #2d2f31;
+  color: white;
+  font-size: 1.2em;
+  font-variant: small-caps;
+  cursor: pointer;
+  display: block;
+  border-radius: 10px; }
+
+.dropdown span::after {
+  float: right;
+  right: 10%;
+  content: "+"; }
+
+.dropdown__slide {
+  clear: both;
+  width: 100%;
+  height: 0px;
+  overflow: hidden;
+  text-align: center;
+  transition: height .4s ease; }
+  .dropdown__slide li {
+    padding: 3rem; }
+  .dropdown__slide--active {
+    height: 15rem;
+    overflow-y: auto; }
+
 .dashboard {
   height: 100%;
   width: 100%;
@@ -122,3 +154,8 @@ body {
   .dashboard__number-range {
     grid-column: 14 / -1;
     grid-row: 1 / 4; }
+  .dashboard__living-room {
+    grid-row: 4/-1;
+    grid-column: 14/-1;
+    padding: 1rem;
+    font-size: 1.4rem; }

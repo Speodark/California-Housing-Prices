@@ -1,3 +1,0 @@
-# this file exists so that we know when not to do the
-# data/new.csv → data/new.csv.hdf5 conversion
-fingerprint: 686c48d2f7234064509b026529e6f27f

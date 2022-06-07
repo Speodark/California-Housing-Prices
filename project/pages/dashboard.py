@@ -3,8 +3,9 @@ import plotly.express as px
 
 import vaex
 from dash import html, dcc
-from components.card import card
+from components.card import card, Card
 from components.number_range import Number_range_AIO
+from components.dropdown import Dropdown
 
 
 
@@ -103,13 +104,58 @@ def most_popular_houses(df):
         className='dashboard__popular-houses'
     )
 
+
+def dropdowns(df):
+    return Card(
+        children=[
+            # living rooms
+            html.Span('Select number of living rooms'),
+            dcc.Dropdown(
+                sorted(df.livingRoom.unique()),
+                placeholder='Select number of living rooms',
+                searchable=False
+            ),
+            # drawing rooms
+            html.Span('Select number of drawing rooms'),
+            dcc.Dropdown(
+                sorted(df.drawingRoom.unique()),
+                placeholder='Select number of drawing rooms',
+                searchable=False
+            ),
+            # kitchens
+            html.Span('Select number of kitchens'),
+            dcc.Dropdown(
+                sorted(df.kitchen.unique()),
+                placeholder='Select number of kitchens',
+                searchable=False
+            ),
+            # bathrooms 
+            html.Span('Select number of bathRooms'),
+            dcc.Dropdown(
+                sorted(df.bathRoom.unique()),
+                placeholder='Select number of bathRooms',
+                searchable=False
+            ),
+            # building type
+            html.Span('Select number of building Type'),
+            dcc.Dropdown(
+                sorted(df.buildingType.unique()),
+                placeholder='Select number of building Type',
+                searchable=False
+            )
+        ],
+        className='dashboard__living-room',
+    )
+
+
 def dashboard():
-    df = vaex.open('assets/data/new.csv.hdf5')
+    df = vaex.open('assets/data/data.csv.hdf5')
     return html.Div(
         className='dashboard',
         children=[
             houses_scatter_map_box(df),
             most_popular_houses(df),
             Number_range_AIO(minimum=0,maximum=100,title='Price Range', className='dashboard__number-range'),
+            dropdowns(df),
         ]
     )

@@ -13,13 +13,13 @@
     grid-gap: 2rem;
 
     &__scatter-map {
-        grid-column: 1 / 8;
-        grid-row: 1 / 5;
+        grid-column: 1 / 13;
+        grid-row: 1 / 8;
     }
 
     &__popular-houses {
-        grid-column: 1 / 8;
-        grid-row: 5 / 11;
+        grid-column: 1 / 13;
+        grid-row: 9 / -1;
     }
 
     &__number-range{

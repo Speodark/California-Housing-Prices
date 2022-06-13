@@ -146,11 +146,11 @@ body {
   grid-template-columns: repeat(16, 1fr);
   grid-gap: 2rem; }
   .dashboard__scatter-map {
-    grid-column: 1 / 8;
-    grid-row: 1 / 5; }
+    grid-column: 1 / 13;
+    grid-row: 1 / 8; }
   .dashboard__popular-houses {
-    grid-column: 1 / 8;
-    grid-row: 5 / 11; }
+    grid-column: 1 / 13;
+    grid-row: 9 / -1; }
   .dashboard__number-range {
     grid-column: 14 / -1;
     grid-row: 1 / 4; }

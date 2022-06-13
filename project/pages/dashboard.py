@@ -6,7 +6,7 @@ from dash import html, dcc
 from components.card import card, Card
 from components.number_range import Number_range_AIO
 from components.dropdown import Dropdown
-
+from pages.callbacks import *
 
 
 def scatter_map_box(latitude, longitude):
@@ -84,7 +84,8 @@ def houses_scatter_map_box(df):
                 latitude=df.Lat.to_numpy(strict=True)[:100000],
                 longitude=df.Lng.to_numpy(strict=True)[:100000]
             ),
-            className='fill-parent-div'
+            className='fill-parent-div',
+            id = {'type':'scatter_map_box','page':'dashboard','index':'houses'}
         ),
         className='dashboard__scatter-map center_items_vertical'
     )
@@ -99,7 +100,8 @@ def most_popular_houses(df):
                 y_axis_name='followers'
             ),
             responsive=True, 
-            className="fill-parent-div"
+            className="fill-parent-div",
+            id = {'type': 'sales_graph', 'index': 'popular_houses'}
         ),
         className='dashboard__popular-houses'
     )
@@ -113,35 +115,40 @@ def dropdowns(df):
             dcc.Dropdown(
                 sorted(df.livingRoom.unique()),
                 placeholder='Select number of living rooms',
-                searchable=False
+                searchable=False,
+                id = {'type':'dropdown','page':'dashboard','index':'livingRoom'}
             ),
             # drawing rooms
             html.Span('Select number of drawing rooms'),
             dcc.Dropdown(
                 sorted(df.drawingRoom.unique()),
                 placeholder='Select number of drawing rooms',
-                searchable=False
+                searchable=False,
+                id = {'type':'dropdown','page':'dashboard','index':'drawingRoom'}
             ),
             # kitchens
             html.Span('Select number of kitchens'),
             dcc.Dropdown(
                 sorted(df.kitchen.unique()),
                 placeholder='Select number of kitchens',
-                searchable=False
+                searchable=False,
+                id = {'type':'dropdown','page':'dashboard','index':'kitchen'}
             ),
             # bathrooms 
             html.Span('Select number of bathRooms'),
             dcc.Dropdown(
                 sorted(df.bathRoom.unique()),
                 placeholder='Select number of bathRooms',
-                searchable=False
+                searchable=False,
+                id = {'type':'dropdown','page':'dashboard','index':'bathRoom'}
             ),
             # building type
             html.Span('Select number of building Type'),
             dcc.Dropdown(
                 sorted(df.buildingType.unique()),
                 placeholder='Select number of building Type',
-                searchable=False
+                searchable=False,
+                id = {'type':'dropdown','page':'dashboard','index':'buildingType'}
             )
         ],
         className='dashboard__living-room',
@@ -155,7 +162,8 @@ def dashboard():
         children=[
             houses_scatter_map_box(df),
             most_popular_houses(df),
-            Number_range_AIO(minimum=0,maximum=100,title='Price Range', className='dashboard__number-range'),
+            Number_range_AIO(minimum=df.price.min(),maximum=df.price.max(),title='Price Range', className='dashboard__number-range'),
             dropdowns(df),
         ]
     )
+

@@ -130,51 +130,56 @@ class Number_range_AIO(Card):  # card will be the "parent" component
         Input(ids.input_max(MATCH), 'value'),    # input_max_value
         Input(ids.range_slider(MATCH), 'value'), # slider_value
         # states
-        State(ids.input_min(MATCH), 'min'),      # minimum
-        State(ids.input_max(MATCH), 'max'),      # maximum
+        Input(ids.input_min(MATCH), 'min'),      # minimum
+        Input(ids.input_max(MATCH), 'max'),      # maximum
         prevent_initial_call=True
     )
     def update_subcomponents_value(input_min_value, input_max_value, slider_value, minimum, maximum):
         trigger_id = ast.literal_eval(dash.callback_context.triggered[0]["prop_id"].split(".")[0])
+
+        
+
         # if the range slider triggered the callback
         if trigger_id['subcomponent'] == 'range_slider':
             return slider_value, min(slider_value), max(slider_value)
-
-        # if the minimum input triggered the callback
-        elif trigger_id['subcomponent'] == 'input_min':
-            # if the input was a number lower than the minimum or there was no input 
-            # we get None.
-            if input_min_value is None:
-                input_min_value = minimum
+            
+        else:
             # if the input was a lower value than the absolute minimum value accepted
-            elif input_min_value < minimum:
+            if input_min_value < minimum:
                 input_min_value = minimum
-            # if the input was a higher value than the absolute maximum value accepted 
-            elif input_min_value > maximum:
-                input_min_value = maximum
-                input_max_value = maximum
-            # if the input was higher than the current maximum input
-            elif input_min_value > input_max_value:
-                input_max_value = input_min_value
-            # return the values after the changes
-            return [input_min_value, input_max_value], input_min_value, input_max_value
-
-        elif trigger_id['subcomponent'] == 'input_max':
-            # if the input was a number higher than the maximum or there was no input 
-            # we get None.
-            if input_max_value is None:
-                input_max_value = maximum
             # if the input was a higher value than the absolute maximum value accepted
-            elif input_max_value > maximum:
+            if input_max_value > maximum:
                 input_max_value = maximum
-            # if the input was a lower value than the absolute minimum value accepted 
-            elif input_max_value < minimum:
-                input_max_value = minimum
-                input_min_value = minimum
-            # if the input was lower than the current minimum input
-            elif input_max_value < input_min_value:
-                input_min_value = input_max_value
-            return [input_min_value, input_max_value], input_min_value, input_max_value
+
+            # if the minimum input triggered the callback
+            if trigger_id['subcomponent'] == 'input_min':
+                # if the input was a number lower than the minimum or there was no input 
+                # we get None.
+                if input_min_value is None:
+                    input_min_value = minimum
+                # if the input was a higher value than the absolute maximum value accepted 
+                elif input_min_value > maximum:
+                    input_min_value = maximum
+                    input_max_value = maximum
+                # if the input was higher than the current maximum input
+                elif input_min_value > input_max_value:
+                    input_max_value = input_min_value
+                # return the values after the changes
+                return [input_min_value, input_max_value], input_min_value, input_max_value
+
+            elif trigger_id['subcomponent'] == 'input_max':
+                # if the input was a number higher than the maximum or there was no input 
+                # we get None.
+                if input_max_value is None:
+                    input_max_value = maximum
+                # if the input was a lower value than the absolute minimum value accepted 
+                elif input_max_value < minimum:
+                    input_max_value = minimum
+                    input_min_value = minimum
+                # if the input was lower than the current minimum input
+                elif input_max_value < input_min_value:
+                    input_min_value = input_max_value
+                return [input_min_value, input_max_value], input_min_value, input_max_value
 
 
     # changes the min and max of the slider if the set min/max of the input labels change

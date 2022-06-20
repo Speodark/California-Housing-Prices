@@ -11,17 +11,17 @@ class Number_range_AIO(Card):  # card will be the "parent" component
     # A set of functions that create pattern-matching callbacks of the subcomponents
     class ids:
         input_max = lambda aio_id: {
-            'component': 'Number_range_AIO',
+            'type': 'Number_range_AIO',
             'subcomponent': 'input_max',
             'aio_id': aio_id
         }
         input_min = lambda aio_id: {
-            'component': 'Number_range_AIO',
+            'type': 'Number_range_AIO',
             'subcomponent': 'input_min',
             'aio_id': aio_id
         }
         range_slider = lambda aio_id: {
-            'component': 'Number_range_AIO',
+            'type': 'Number_range_AIO',
             'subcomponent': 'range_slider',
             'aio_id': aio_id
         }
@@ -137,28 +137,32 @@ class Number_range_AIO(Card):  # card will be the "parent" component
     def update_subcomponents_value(input_min_value, input_max_value, slider_value, minimum, maximum):
         trigger_id = ast.literal_eval(dash.callback_context.triggered[0]["prop_id"].split(".")[0])
 
-        
-
         # if the range slider triggered the callback
         if trigger_id['subcomponent'] == 'range_slider':
+            print(slider_value)
             return slider_value, min(slider_value), max(slider_value)
             
         else:
-            # if the input was a lower value than the absolute minimum value accepted
-            if input_min_value < minimum:
+            # if the input was a number lower than the minimum or there was no input 
+            # we get None.
+            if input_min_value is None:
                 input_min_value = minimum
+            # if the input was a lower value than the absolute minimum value accepted
+            elif input_min_value < minimum:
+                input_min_value = minimum
+            # if the input was a number higher than the maximum or there was no input 
+            # we get None.
+            if input_max_value is None:
+                input_max_value = maximum
             # if the input was a higher value than the absolute maximum value accepted
-            if input_max_value > maximum:
+            elif input_max_value > maximum:
                 input_max_value = maximum
 
             # if the minimum input triggered the callback
             if trigger_id['subcomponent'] == 'input_min':
-                # if the input was a number lower than the minimum or there was no input 
-                # we get None.
-                if input_min_value is None:
-                    input_min_value = minimum
+               
                 # if the input was a higher value than the absolute maximum value accepted 
-                elif input_min_value > maximum:
+                if input_min_value > maximum:
                     input_min_value = maximum
                     input_max_value = maximum
                 # if the input was higher than the current maximum input
@@ -168,12 +172,8 @@ class Number_range_AIO(Card):  # card will be the "parent" component
                 return [input_min_value, input_max_value], input_min_value, input_max_value
 
             elif trigger_id['subcomponent'] == 'input_max':
-                # if the input was a number higher than the maximum or there was no input 
-                # we get None.
-                if input_max_value is None:
-                    input_max_value = maximum
                 # if the input was a lower value than the absolute minimum value accepted 
-                elif input_max_value < minimum:
+                if input_max_value < minimum:
                     input_max_value = minimum
                     input_min_value = minimum
                 # if the input was lower than the current minimum input

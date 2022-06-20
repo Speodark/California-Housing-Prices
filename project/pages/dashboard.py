@@ -81,8 +81,8 @@ def houses_scatter_map_box(df):
         header='houses on a map!',
         children=dcc.Graph(
             figure=scatter_map_box(
-                latitude=df.Lat.to_numpy(strict=True)[:100000],
-                longitude=df.Lng.to_numpy(strict=True)[:100000]
+                latitude=df.Lat.to_numpy(strict=True),
+                longitude=df.Lng.to_numpy(strict=True)
             ),
             className='fill-parent-div',
             id = {'type':'scatter_map_box','page':'dashboard','index':'houses'}
@@ -162,7 +162,13 @@ def dashboard():
         children=[
             houses_scatter_map_box(df),
             most_popular_houses(df),
-            Number_range_AIO(minimum=df.price.min(),maximum=df.price.max(),title='Price Range', className='dashboard__number-range'),
+            Number_range_AIO(
+                minimum=df.price.min(),
+                maximum=df.price.max(),
+                title='Price Range', 
+                className='dashboard__number-range',
+                aio_id='price'
+            ),
             dropdowns(df),
         ]
     )

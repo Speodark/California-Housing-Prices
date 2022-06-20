@@ -17,16 +17,7 @@ def bar_chart(df=None, x_axis_name=None, y_axis_name=None):
         title='top 10 houses by popularity',
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
-        # legend=dict(
-        #     yanchor="middle",
-        #     y=1.1,
-        #     xanchor="center",
-        #     x=0.5,
-        #     title={'text': None}
-        # ),
-        # margin={"t": 30, "b": 0, "r": 20, "l": 0, "pad": 0},
     )
-    # fig.update_yaxes(title_text='')
     return fig
 
 df = vaex.open('assets/data/data.csv.hdf5')
